@@ -1,9 +1,19 @@
-import handleSubmit from './js/formHandler'
+import handleSubmit from './js/formHandler';
+import checkURL from './js/checkURL';
 
-// TODO include your scss file here
+//SASS files
+import './styles/_base.scss'
+import './styles/_footer.scss'
+import './styles/_form.scss'
+import './styles/_header.scss'
+import './styles/_resets.scss'
+import './styles/style.scss'
 
 window.addEventListener('DOMContentLoaded', () => {
-    // TODO: get the button for submit
-    // TODO: add event listener to it when the click to call handleSubmit function
+    //added listener for fromHandler
+    document.getElementById('btn').addEventListener('click', () => {
+        alert('button hooked');
+        handleSubmit();
+    })
 })
-export { handleSubmit }
+export { handleSubmit, checkURL};

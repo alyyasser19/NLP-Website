@@ -1,25 +1,36 @@
-// TODO: Configure the environment variables
-
-const mockAPIResponse = require('./mockAPI.js')
-
-const PORT = 8081
-
-// TODO add Configuration to be able to use env variables
-
 const BASE_API_URL = 'https://api.meaningcloud.com/sentiment-2.1'
+const mockAPIResponse = require('./mockAPI.js');
+const PORT = 3030;
 
-// TODO: Create an instance for the server
-// TODO: Configure cors to avoid cors-origin issue
-// TODO: Configure express to use body-parser as middle-ware.
-// TODO: Configure express static directory.
+//setting path
+const path = require('path')
+
+//Dotenv configuration
+const dotenv= require('dotenv').config();
+
+//setting up express and using a static path
+const express = require('express');
+const app = express();
+app.use(express.static('dist'))
+
+//Setting up bodyParse
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.use(bodyParser.json());
+
+//setting up cors
+const cors = require('cors');
+app.use(cors());
+
 
 app.get('/', function (req, res) {
-    // res.sendFile('dist/index.html')
-    res.sendFile(path.resolve('src/client/views/index.html'))
+    //res.sendFile('dist/index.html')
+    res.sendFile(path.resolve('src/client/views/index.html'));
 })
 // INFO: a route that handling post request for new URL that coming from the frontend
 app.post('/add-url', async (req, res) => {
     try {
+        alert('working')
         /* TODO:
     1. GET the url from the request body
     2. Build the URL it should be something like `${BASE_API_URL}?key=${MEAN_CLOUD_API_KEY}&url=${req.body.url}&lang=en`

@@ -15,16 +15,26 @@ const post = async (url = '', data = {}) => {
     }
 }
 
-const handleSubmit = async () => {
-    /**
-     * TODO
-     *  - Get Value of the input for URL
-     *  - Check if it's URL or not
-     *      yes
-     *          send it to the backend
-     *      no
-     *          show user message it's not valid URL
-     */
+const handleSubmit = async (event) => {
+    event.preventDefault();
+    alert('OH NO');
+
+    url = document.getElementById('url').value;
+    Client.console.log('test1')
+    
+    if(Client.checkURL(url)){
+        post('http://localhost:8080//add-url', { url }).then(data =>{
+            document.getElementById('text').innerHTML = data.text;
+            document.getElementById('agreement').innerHTML = data.agreement;           
+            document.getElementById('subjectivity').innerHTML = data.subjectivity;
+            document.getElementById('confidence').innerHTML = data.confidence
+            document.getElementById('irony').innerHTML = data.irony;
+            document.getElementById('score_tag').innerHTML = data.score_tag;
+        })
+    }else{
+        alert('OH NO')
+    }
+
 }
 
 export default handleSubmit
