@@ -22,13 +22,13 @@ const handleSubmit = async () => {
 
     
     if(client.checkURL(url)){
-        post('http://localhost:3030//add-url', { url }).then(data =>{
-            document.getElementById('text').innerHTML = data.text;
-            document.getElementById('agreement').innerHTML = data.agreement;           
-            document.getElementById('subjectivity').innerHTML = data.subjectivity;
+        await post('http://localhost:3030/add-url', { url }).then((data) => {
+            document.getElementById('text').innerHTML = data.text 
+            document.getElementById('agreement').innerHTML = data.agreement
+            document.getElementById('subjectivity').innerHTML = data.subjectivity
             document.getElementById('confidence').innerHTML = data.confidence
-            document.getElementById('irony').innerHTML = data.irony;
-            document.getElementById('score_tag').innerHTML = data.score_tag;
+            document.getElementById('irony').innerHTML = data.irony
+            document.getElementById('score_tag').innerHTML = data.score_tag
         })
     }else{
         alert('URL invalid')

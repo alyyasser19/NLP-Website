@@ -1,4 +1,5 @@
 const BASE_API_URL = 'https://api.meaningcloud.com/sentiment-2.1'
+const MEAN_CLOUD_API_KEY = process.env.MEAN_CLOUD_API_KEY
 const mockAPIResponse = require('./mockAPI.js');
 const PORT = 3030;
 
@@ -18,35 +19,35 @@ var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.use(bodyParser.json());
 
+//seetting up axios
+const axios = require('axios');
+
 //setting up cors
 const cors = require('cors');
 app.use(cors());
 
 
 app.get('/', function (req, res) {
-    //res.sendFile('dist/index.html')
-    res.sendFile(path.resolve('src/client/views/index.html'));
+    res.sendFile('dist/index.html')
+    //res.sendFile(path.resolve('src/client/views/index.html'));
 })
-// INFO: a route that handling post request for new URL that coming from the frontend
+
 app.post('/add-url', async (req, res) => {
     try {
-        alert('working')
-        /* TODO:
-    1. GET the url from the request body
-    2. Build the URL it should be something like `${BASE_API_URL}?key=${MEAN_CLOUD_API_KEY}&url=${req.body.url}&lang=en`
-    3. Fetch Data from API
-    4. Send it to the client
-    5. REMOVE THIS TODO AFTER DOING IT 😎😎
-    server sends only specified data to the client with below codes
-     const sample = {
-       text: '',
-       score_tag : '',
-       agreement : '',
-       subjectivity : '',
-       confidence : '',
-       irony : ''
-     }
-  */
+        //console.log(req.body.url);
+        const url= req.body.url;
+        const meaningCloudUrl = `${BASE_API_URL}?key=${process.env.API_KEY}&url=${url}&lang=en`
+        const data = await axios(meaningCloudUrl);
+        //console.log(data);
+        console.log(data.data.sentence_list[50].text);
+        res.send({
+            agreement : data.data.agreement,
+            subjectivity: data.data.subjectivity,
+            irony: data.data.irony,
+            confidence: data.data.confidence,
+            score_tag: data.data.score_tag,
+            text: data.data.sentence_list[50].text,
+        });
     } catch (error) {
         console.log(error.message)
     }

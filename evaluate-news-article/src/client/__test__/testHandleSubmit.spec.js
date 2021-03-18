@@ -2,6 +2,10 @@
 // https://knowledge.udacity.com/questions/174638
 import 'babel-polyfill'
 
-describe('Client Test', () => {
-    // TODO: add your test cases to test client
+import handleSubmit from '../js/formHandler'
+
+describe('Testing submit', () => {
+    test('Testing handleSubmit()', () => {
+        expect(handleSubmit).toBeDefined()
+    })
 })
