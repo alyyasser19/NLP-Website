@@ -1,7 +1,7 @@
 const BASE_API_URL = 'https://api.meaningcloud.com/sentiment-2.1'
 const MEAN_CLOUD_API_KEY = process.env.MEAN_CLOUD_API_KEY
 const mockAPIResponse = require('./mockAPI.js');
-const PORT = 3030;
+const PORT = 3030 || process.env.PORT;
 
 //setting path
 const path = require('path')
