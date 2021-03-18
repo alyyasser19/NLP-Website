@@ -11,8 +11,8 @@ import './styles/style.scss'
 
 window.addEventListener('DOMContentLoaded', () => {
     //added listener for fromHandler
-    document.getElementById('btn').addEventListener('click', () => {
-        alert('button hooked');
+    document.getElementById('btn').addEventListener('click', (e) => {
+        e.preventDefault();
         handleSubmit();
     })
 })

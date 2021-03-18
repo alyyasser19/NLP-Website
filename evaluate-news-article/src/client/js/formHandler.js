@@ -15,15 +15,14 @@ const post = async (url = '', data = {}) => {
     }
 }
 
-const handleSubmit = async (event) => {
-    event.preventDefault();
-    alert('OH NO');
-
-    url = document.getElementById('url').value;
-    Client.console.log('test1')
+const handleSubmit = async () => {
     
-    if(Client.checkURL(url)){
-        post('http://localhost:8080//add-url', { url }).then(data =>{
+
+   const url = document.getElementById('article-url').value
+
+    
+    if(client.checkURL(url)){
+        post('http://localhost:3030//add-url', { url }).then(data =>{
             document.getElementById('text').innerHTML = data.text;
             document.getElementById('agreement').innerHTML = data.agreement;           
             document.getElementById('subjectivity').innerHTML = data.subjectivity;
@@ -32,7 +31,7 @@ const handleSubmit = async (event) => {
             document.getElementById('score_tag').innerHTML = data.score_tag;
         })
     }else{
-        alert('OH NO')
+        alert('URL invalid')
     }
 
 }
